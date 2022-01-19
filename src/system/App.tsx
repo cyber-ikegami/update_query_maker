@@ -1,9 +1,23 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import './importFrame.tsx';
 
 const App = ()=> {
   type Mode = 'import' | 'edit' | 'output';
   const [mode, setMode] = useState<Mode>('import');
+
+  const contentsJsx = <></>;
+  switch (mode) {
+    case 'import':
+      alert('a');
+      break;
+    case 'edit':
+      alert('b');
+      break;
+    case 'output':
+      alert('c');
+      break;
+  }
 
   return (
     <>
