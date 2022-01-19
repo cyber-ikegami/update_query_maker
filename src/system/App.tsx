@@ -1,17 +1,16 @@
-import { Mode } from 'fs';
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
 const App = ()=> {
   type Mode = 'import' | 'edit' | 'output';
-  const [Mode, setMode] = useState<string>();
+  const [mode, setMode] = useState<Mode>('import');
 
   return (
     <>
       <_Header>
-        <_ModeItem isActive={}>データセット</_ModeItem>
-        <_ModeItem>データ編集</_ModeItem>
-        <_ModeItem>出力結果</_ModeItem>
+        <_ModeItem isActive={mode==='import'}>データセット</_ModeItem>
+        <_ModeItem isActive={mode==='edit'}>データ編集</_ModeItem>
+        <_ModeItem isActive={mode==='output'}>出力結果</_ModeItem>
       </_Header>
       <_Body></_Body>
       <_Footer></_Footer>
@@ -20,7 +19,6 @@ const App = ()=> {
 }
 
 export default App;
-
 
 // ヘッダー
 const _Header= styled.div`
@@ -33,7 +31,7 @@ const _Header= styled.div`
 const _ModeItem = styled.div<{
   isActive: boolean;
 }>`
-  background-color: #eee197;
+  background-color: ${props => props.isActive ? '#f37e7e' : '#eee197'};
   font-size: 15px;
   text-align: center;
   width: 100px;
