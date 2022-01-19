@@ -8,9 +8,15 @@ const App = ()=> {
   return (
     <>
       <_Header>
-        <_ModeItem isActive={mode==='import'}>データセット</_ModeItem>
-        <_ModeItem isActive={mode==='edit'}>データ編集</_ModeItem>
-        <_ModeItem isActive={mode==='output'}>出力結果</_ModeItem>
+        <_ModeItem isActive={mode==='import'} onClick={()=>{
+          setMode('import')
+        }} >データセット</_ModeItem>
+        <_ModeItem isActive={mode==='edit'} onClick={()=>{
+          setMode('edit')
+        }} >データ編集</_ModeItem>
+        <_ModeItem isActive={mode==='output'} onClick={()=>{
+          setMode('output')
+        }} >出力結果</_ModeItem>
       </_Header>
       <_Body></_Body>
       <_Footer></_Footer>
