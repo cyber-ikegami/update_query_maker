@@ -14,24 +14,24 @@ const App = ()=> {
   switch (mode) {
     case 'import':
       contentsJsx = <ImportFrame />;
-      buttonsJsx = <_Button>
-        <button>クリア</button>
-        <button>インポート</button>
-        </_Button>;
+      buttonsJsx = <>
+        <_Button>クリア</_Button>
+        <_Button>インポート</_Button>
+        </>;
       break;
     case 'edit':
       contentsJsx = <EditFrame />;
-      buttonsJsx = <_Button>
-        <button>変更をリセット</button>
-        <button>UPDATE文作成</button>
-        </_Button>;
+      buttonsJsx = <>
+        <_Button>変更をリセット</_Button>
+        <_Button>UPDATE文作成</_Button>
+        </>;
       break;
     case 'output':
       contentsJsx = <OutputFrame />;
-      buttonsJsx = <_Button>
-        <button>編集に戻る</button>
-        <button>UPDATE文作成</button>
-        </_Button>;
+      buttonsJsx = <>
+        <_Button>編集に戻る</_Button>
+        <_Button>UPDATE文作成</_Button>
+        </>;
       break;
   }
 
@@ -86,25 +86,25 @@ const _Body= styled.div`
 // フッター
 const _Footer= styled.div`
   background-color: #c8e7ed;
+  text-align: right;
   width: 100%;
   height: 50px;
   `;
   
 // ボタン
 const _Button = styled.div`
-  text-align: right;
-  & button {
-    background-color:#eef5ff;
-    font-size: 15px;
-    width: 130px;
-    height: 40px;
-    text-align: center;
-    line-height: 25px;
-    margin-top: 5px;
-    margin-right: 5px;
-    border: 1px solid #919191;
-    border-radius: 5px;
-  & button:hover {
+  display: inline-block;
+  background-color:#eef5ff;
+  font-size: 15px;
+  width: 130px;
+  height: calc(100% - 10px);
+  text-align: center;
+  line-height: 40px;
+  margin-top: 5px;
+  margin-right: 5px;
+  border: 1px solid #919191;
+  border-radius: 5px;
+  &:hover {
     background-color:#b1bff5;
   }
 `;
