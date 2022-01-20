@@ -1,21 +1,23 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import './importFrame.tsx';
+import ImportFrame from './importFrame';
+import EditFrame from './editFrame';
+import OutputFrame from './outputFrame';
 
 const App = ()=> {
   type Mode = 'import' | 'edit' | 'output';
   const [mode, setMode] = useState<Mode>('import');
 
-  const contentsJsx = <></>;
+  let contentsJsx = <></>;
   switch (mode) {
     case 'import':
-      alert('a');
+      contentsJsx = <ImportFrame />;
       break;
     case 'edit':
-      alert('b');
+      contentsJsx = <EditFrame />;
       break;
     case 'output':
-      alert('c');
+      contentsJsx = <OutputFrame />;
       break;
   }
 
@@ -32,7 +34,7 @@ const App = ()=> {
           setMode('output')
         }} >出力結果</_ModeItem>
       </_Header>
-      <_Body></_Body>
+      <_Body>{contentsJsx}</_Body>
       <_Footer></_Footer>
     </>
   );
@@ -63,7 +65,6 @@ const _ModeItem = styled.div<{
 
 // ボディ
 const _Body= styled.div`
-  background-color: #97e1ee;
   width: 100%;
   height: calc(100% - 100px);
 `;
