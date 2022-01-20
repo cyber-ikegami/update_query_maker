@@ -8,16 +8,30 @@ const App = ()=> {
   type Mode = 'import' | 'edit' | 'output';
   const [mode, setMode] = useState<Mode>('import');
 
+  // 画面切り替え
   let contentsJsx = <></>;
+  let buttonsJsx = <></>;
   switch (mode) {
     case 'import':
       contentsJsx = <ImportFrame />;
+      buttonsJsx = <_Button>
+        <button>クリア</button>
+        <button>インポート</button>
+        </_Button>;
       break;
     case 'edit':
       contentsJsx = <EditFrame />;
+      buttonsJsx = <_Button>
+        <button>変更をリセット</button>
+        <button>UPDATE文作成</button>
+        </_Button>;
       break;
     case 'output':
       contentsJsx = <OutputFrame />;
+      buttonsJsx = <_Button>
+        <button>編集に戻る</button>
+        <button>UPDATE文作成</button>
+        </_Button>;
       break;
   }
 
@@ -35,7 +49,7 @@ const App = ()=> {
         }} >出力結果</_ModeItem>
       </_Header>
       <_Body>{contentsJsx}</_Body>
-      <_Footer></_Footer>
+      <_Footer>{buttonsJsx}</_Footer>
     </>
   );
 }
@@ -76,3 +90,21 @@ const _Footer= styled.div`
   height: 50px;
   `;
   
+// ボタン
+const _Button = styled.div`
+  text-align: right;
+  & button {
+    background-color:#eef5ff;
+    font-size: 15px;
+    width: 130px;
+    height: 40px;
+    text-align: center;
+    line-height: 25px;
+    margin-top: 5px;
+    margin-right: 5px;
+    border: 1px solid #919191;
+    border-radius: 5px;
+  & button:hover {
+    background-color:#b1bff5;
+  }
+`;
