@@ -7,17 +7,19 @@ import OutputFrame from './outputFrame';
 const App = ()=> {
   type Mode = 'import' | 'edit' | 'output';
   const [mode, setMode] = useState<Mode>('import');
-  const [baseText, setBaseText] = useState<string>();
+  const [baseText, setBaseText] = useState<string>('');
 
   // 画面切り替え
   let contentsJsx = <></>;
   let buttonsJsx = <></>;
   switch (mode) {
     case 'import':
-      contentsJsx = <ImportFrame value=''/>;
+      contentsJsx = <ImportFrame baseText={baseText} setBaseText={setBaseText}/>;
       buttonsJsx = <>
         <_Button>クリア</_Button>
-        <_Button>インポート</_Button>
+        <_Button  onClick={()=>{
+          setMode('edit')
+        }}>インポート</_Button>
         </>;
       break;
     case 'edit':
