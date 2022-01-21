@@ -7,13 +7,14 @@ import OutputFrame from './outputFrame';
 const App = ()=> {
   type Mode = 'import' | 'edit' | 'output';
   const [mode, setMode] = useState<Mode>('import');
+  const [baseText, setBaseText] = useState<string>();
 
   // 画面切り替え
   let contentsJsx = <></>;
   let buttonsJsx = <></>;
   switch (mode) {
     case 'import':
-      contentsJsx = <ImportFrame />;
+      contentsJsx = <ImportFrame value=''/>;
       buttonsJsx = <>
         <_Button>クリア</_Button>
         <_Button>インポート</_Button>
@@ -89,7 +90,7 @@ const _Footer= styled.div`
   text-align: right;
   width: 100%;
   height: 50px;
-  `;
+`;
   
 // ボタン
 const _Button = styled.div`
