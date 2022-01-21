@@ -3,11 +3,11 @@ import styled from 'styled-components';
 
 const editFrame = ()=> {
   return (
-    <_Frame><_Table>
-      <_Record>risyunen</_Record>
-      <_Record>semekikn</_Record>
-      <_Record>kougicd</_Record>
-    </_Table></_Frame>
+    <_Frame><_Table><_Record>
+      <_Column>risyunen</_Column>
+      <_Column>semekikn</_Column>
+      <_Column>kougicd</_Column>
+    </_Record></_Table></_Frame>
   );
 }
 
@@ -29,15 +29,15 @@ const _Table = styled.div`
 `;
 
 const _Record = styled.div`
+  display: block;
+  height: 20px;
+`;
+
+const _Column = styled.div`
   background-color: #7890d8;
   font-size: 15px;
   padding-left: 5px;
   padding-right: 5px;
   display: inline-block;
-  height: 20px;
   border: 1px solid #1a1a1a;
-`;
-
-const _Column = styled.div`
-
 `;
