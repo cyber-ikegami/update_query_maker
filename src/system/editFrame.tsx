@@ -1,12 +1,17 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { EditBean } from './editBean';
 
-const editFrame = ()=> {
+const editFrame = (props: {
+  editBean: EditBean;
+})=> {
+  const columnNameJsxList: JSX.Element[] = [];
+  for(let i = 0; i < props.editBean.columnNames.length; i++){
+    columnNameJsxList.push(<_Column>{props.editBean.columnNames[i]}</_Column>);
+  }
   return (
     <_Frame><_Table><_Record>
-      <_Column>risyunen</_Column>
-      <_Column>semekikn</_Column>
-      <_Column>kougicd</_Column>
+      {columnNameJsxList}
     </_Record></_Table></_Frame>
   );
 }
