@@ -2,17 +2,20 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 
 const importFrame = (props: {
-    value: string;
+    baseText: string;
+    setBaseText: Function;
 })=> {
   return (
-      <_Frame><textarea></textarea></_Frame>
+      <_Frame><textarea value={props.baseText} onChange={(e)=>{
+        props.setBaseText(e.target.value);
+      }}/></_Frame>
   );
 }
 
 export default importFrame;
 
 const _Frame = styled.div`
-  background-color: #f37e7e;
+  background-color: #b9c3eb;
   width: 100%;
   height: 100%;
   & textarea {

@@ -10,7 +10,7 @@ const outputFrame = ()=> {
 export default outputFrame;
 
 const _Frame = styled.div`
-  background-color: #97e1ee;
+  background-color: #b9c3eb;
   width: 100%;
   height: 100%;
 `;
