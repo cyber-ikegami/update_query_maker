@@ -29,6 +29,8 @@ const _Table = styled.div`
   display: inline-block;
   margin-left: 10px;
   margin-top: 10px;
+  white-space: nowrap;
+  overflow: scroll;
   width: calc(100% - 20px);
   height: calc(100% - 20px);
 `;
@@ -36,7 +38,7 @@ const _Table = styled.div`
 const _Record = styled.div`
   display: block;
   height: 20px;
-`;
+  `;
 
 const _Column = styled.div`
   background-color: #7890d8;
@@ -45,4 +47,5 @@ const _Column = styled.div`
   padding-right: 5px;
   display: inline-block;
   border: 1px solid #1a1a1a;
-`;
+  width: 100px;
+  `;
