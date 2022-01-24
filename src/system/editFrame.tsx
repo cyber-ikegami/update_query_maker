@@ -10,7 +10,9 @@ const editFrame = (props: {
   const primalyKeyList: JSX.Element[] = [];
   for (let i = 0; i < props.editBean.columnNames.length; i++) {
     columnNameJsxList.push(<_Column>{props.editBean.columnNames[i]}</_Column>);
-    primalyKeyList.push(<_Check> <input type="checkbox" checked={props.editBean.primalyKeys[i]}/> </_Check>);
+    primalyKeyList.push(<_Check><input type="checkbox" checked={props.editBean.primalyKeys[i]} onChange={(e)=>{
+      props.setEditBean(e.target.checked) 
+    }} /> </_Check>);
   }
   
   const recordJsxList: JSX.Element[] = [];
