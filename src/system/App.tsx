@@ -3,13 +3,14 @@ import styled from 'styled-components';
 import ImportFrame from './importFrame';
 import EditFrame from './editFrame';
 import OutputFrame from './outputFrame';
-import { EditBean } from './editBean';
+import createEditBean, { EditBean } from './editBean';
 
 
 const App = ()=> {
   type Mode = 'import' | 'edit' | 'output';
   const [mode, setMode] = useState<Mode>('import');
   const [baseText, setBaseText] = useState<string>('');
+
   const [editBean, setEditBean] = useState<EditBean>({columnNames: []});
 
   // 画面切り替え
@@ -21,7 +22,7 @@ const App = ()=> {
       buttonsJsx = <>
         <_Button>クリア</_Button>
         <_Button  onClick={()=>{
-          setEditBean({columnNames: baseText.split(/\n/g)[0].split(/[,\t]/g)});
+          setEditBean({columnNames: {createEditBean}});
           setMode('edit');
         }}>インポート</_Button>
         </>;
