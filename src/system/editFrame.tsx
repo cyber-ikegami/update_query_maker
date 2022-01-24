@@ -4,15 +4,34 @@ import { EditBean } from './editBean';
 
 const editFrame = (props: {
   editBean: EditBean;
-})=> {
+  setEditBean: Function;
+}) => {
   const columnNameJsxList: JSX.Element[] = [];
-  for(let i = 0; i < props.editBean.columnNames.length; i++){
+  const primalyKeyList: JSX.Element[] = [];
+  for (let i = 0; i < props.editBean.columnNames.length; i++) {
     columnNameJsxList.push(<_Column>{props.editBean.columnNames[i]}</_Column>);
+    primalyKeyList.push(<_Check> <input type="checkbox" checked={props.editBean.primalyKeys[i]}/> </_Check>);
   }
+  
+  const recordJsxList: JSX.Element[] = [];
+  for (let j = 0; j < props.editBean.dataTable.length; j++) {
+    const dataNameJsxList: JSX.Element[] = [];
+    for (let k = 0; k < props.editBean.columnNames.length; k++) {
+      dataNameJsxList.push(<_Data>{props.editBean.dataTable[j][k]}</_Data>);
+    }
+    recordJsxList.push(<_Record>{dataNameJsxList}</_Record>);
+  }
+
   return (
-    <_Frame><_Table><_Record>
-      {columnNameJsxList}
-    </_Record></_Table></_Frame>
+    <_Frame><_Table>
+      <_Record>
+        {columnNameJsxList}
+      </_Record>
+      <_Record>
+        {primalyKeyList}
+      </_Record>
+        {recordJsxList}
+    </_Table></_Frame>
   );
 }
 
@@ -37,8 +56,8 @@ const _Table = styled.div`
 
 const _Record = styled.div`
   display: block;
-  height: 20px;
-  `;
+  height: 24px;
+`;
 
 const _Column = styled.div`
   background-color: #7890d8;
@@ -48,4 +67,29 @@ const _Column = styled.div`
   display: inline-block;
   border: 1px solid #1a1a1a;
   width: 100px;
-  `;
+  height: 100%;
+`;
+
+const _Check = styled.div`
+  background-color: #78d8c6;
+  display: inline-block;
+  border: 1px solid #1a1a1a;
+  padding-left: 5px;
+  padding-right: 5px;
+  width: 100px;
+  height: 100%;
+`;
+
+const _Data = styled.div`
+  background-color: #dbdde2;
+  font-size: 15px;
+  padding-left: 5px;
+  padding-right: 5px;
+  display: inline-block;
+  border: 1px solid #1a1a1a;
+  width: 100px;
+  height: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+`;
+

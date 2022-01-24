@@ -3,15 +3,14 @@ import styled from 'styled-components';
 import ImportFrame from './importFrame';
 import EditFrame from './editFrame';
 import OutputFrame from './outputFrame';
-import createEditBean, { EditBean } from './editBean';
-
+import { createEditBean, EditBean } from './editBean';
 
 const App = ()=> {
   type Mode = 'import' | 'edit' | 'output';
   const [mode, setMode] = useState<Mode>('import');
   const [baseText, setBaseText] = useState<string>('');
 
-  const [editBean, setEditBean] = useState<EditBean>({columnNames: []});
+  const [editBean, setEditBean] = useState<EditBean>({columnNames: [], primalyKeys: [], dataTable: []});
 
   // 画面切り替え
   let contentsJsx = <></>;
@@ -22,13 +21,13 @@ const App = ()=> {
       buttonsJsx = <>
         <_Button>クリア</_Button>
         <_Button  onClick={()=>{
-          setEditBean({columnNames: {createEditBean}});
+          setEditBean(createEditBean(baseText));
           setMode('edit');
         }}>インポート</_Button>
         </>;
       break;
     case 'edit':
-      contentsJsx = <EditFrame editBean={editBean}/>;
+      contentsJsx = <EditFrame editBean={editBean} setEditBean={setEditBean}/>;
       buttonsJsx = <>
         <_Button>変更をリセット</_Button>
         <_Button>UPDATE文作成</_Button>
