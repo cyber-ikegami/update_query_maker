@@ -22,10 +22,10 @@ const editFrame = (props: {
     for (let k = 0; k < props.editBean.columnNames.length; k++) {
       const isKey =  props.editBean.primalyKeys[k];
       if(isKey){
-        dataNameJsxList.push(<_Data>{props.editBean.dataTable[j][k]}</_Data>);
+        dataNameJsxList.push(<_Data><b>{props.editBean.dataTable[j][k]}</b></_Data>);
       } else {
-        dataNameJsxList.push(<_Text><input type="textbox" value={props.editBean.dataTable[j][k]} onChange={(e)=>{
-          props.editBean.primalyKeys[k] = e.target.checked;
+        dataNameJsxList.push(<_Text><input type="text" value={props.editBean.dataTable[j][k]} onChange={(e)=>{
+          props.editBean.dataTable[j][k] = e.target.value;
           props.setEditBean({...props.editBean}); 
         }} /> </_Text>);
       }
@@ -93,6 +93,7 @@ const _Check = styled.div`
 
 const _Data = styled.div`
   background-color: #ffef78;
+  color: #264ec9;
   font-size: 15px;
   padding-left: 5px;
   padding-right: 5px;
