@@ -22,7 +22,7 @@ const editFrame = (props: {
     for (let k = 0; k < props.editBean.columnNames.length; k++) {
       const isKey =  props.editBean.primalyKeys[k];
       if(isKey){
-        dataNameJsxList.push(<_Data><b>{props.editBean.dataTable[j][k]}</b></_Data>);
+        dataNameJsxList.push(<_Data><b>{props.editBean.backupTable[j][k]}</b></_Data>);
       } else {
         const isSame =  props.editBean.dataTable[j][k] === props.editBean.backupTable[j][k];
         dataNameJsxList.push(<_Text isSame={isSame}><input type="text" value={props.editBean.dataTable[j][k]} onChange={(e)=>{
