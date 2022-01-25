@@ -24,7 +24,8 @@ const editFrame = (props: {
       if(isKey){
         dataNameJsxList.push(<_Data><b>{props.editBean.dataTable[j][k]}</b></_Data>);
       } else {
-        dataNameJsxList.push(<_Text><input type="text" value={props.editBean.dataTable[j][k]} onChange={(e)=>{
+        const isSame =  props.editBean.dataTable[j][k] === props.editBean.backupTable[j][k];
+        dataNameJsxList.push(<_Text isSame={isSame}><input type="text" value={props.editBean.dataTable[j][k]} onChange={(e)=>{
           props.editBean.dataTable[j][k] = e.target.value;
           props.setEditBean({...props.editBean}); 
         }} /> </_Text>);
@@ -105,7 +106,9 @@ const _Data = styled.div`
   overflow: hidden;
 `;
 
-const _Text = styled.div`
+const _Text = styled.div<{
+  isSame: boolean;
+}>`
   display: inline-block;
   border: 1px solid #1a1a1a;
   width: 110px;
@@ -113,6 +116,7 @@ const _Text = styled.div`
   white-space: nowrap;
   overflow: hidden;
   & input {
+    color: ${props => props.isSame?'#000000':'#ff3333'};
     font-size: 15px;
     width: 110px;
     height: 100%;

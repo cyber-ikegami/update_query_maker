@@ -10,7 +10,7 @@ const App = ()=> {
   const [mode, setMode] = useState<Mode>('import');
   const [baseText, setBaseText] = useState<string>('');
 
-  const [editBean, setEditBean] = useState<EditBean>({columnNames: [], primalyKeys: [], dataTable: []});
+  const [editBean, setEditBean] = useState<EditBean>({columnNames: [], primalyKeys: [], dataTable: [], backupTable:[]});
 
   // 画面切り替え
   let contentsJsx = <></>;
