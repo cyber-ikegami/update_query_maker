@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 export type EditBean = {
     columnNames: string[];
+    backupTable: string[][];
     dataTable: string[][];
     primalyKeys: boolean[];
 }
@@ -23,9 +24,11 @@ export const createEditBean = (baseText: string): EditBean => {
             dataTable.push(columns);
         }
     }
+
     return {
         columnNames,
         primalyKeys,
+        backupTable: JSON.parse(JSON.stringify(dataTable)),
         dataTable
     };
 }
