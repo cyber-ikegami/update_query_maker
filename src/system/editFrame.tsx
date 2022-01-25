@@ -11,7 +11,8 @@ const editFrame = (props: {
   for (let i = 0; i < props.editBean.columnNames.length; i++) {
     columnNameJsxList.push(<_Column>{props.editBean.columnNames[i]}</_Column>);
     primalyKeyList.push(<_Check><input type="checkbox" checked={props.editBean.primalyKeys[i]} onChange={(e)=>{
-      props.setEditBean(e.target.checked) 
+      props.editBean.primalyKeys[i] = e.target.checked;
+      props.setEditBean({...props.editBean}); 
     }} /> </_Check>);
   }
   
@@ -19,7 +20,15 @@ const editFrame = (props: {
   for (let j = 0; j < props.editBean.dataTable.length; j++) {
     const dataNameJsxList: JSX.Element[] = [];
     for (let k = 0; k < props.editBean.columnNames.length; k++) {
-      dataNameJsxList.push(<_Data>{props.editBean.dataTable[j][k]}</_Data>);
+      const isKey =  props.editBean.primalyKeys[k];
+      if(isKey){
+        dataNameJsxList.push(<_Data>{props.editBean.dataTable[j][k]}</_Data>);
+      } else {
+        dataNameJsxList.push(<_Text><input type="textbox" value={props.editBean.dataTable[j][k]} onChange={(e)=>{
+          props.editBean.primalyKeys[k] = e.target.checked;
+          props.setEditBean({...props.editBean}); 
+        }} /> </_Text>);
+      }
     }
     recordJsxList.push(<_Record>{dataNameJsxList}</_Record>);
   }
@@ -83,7 +92,7 @@ const _Check = styled.div`
 `;
 
 const _Data = styled.div`
-  background-color: #dbdde2;
+  background-color: #ffef78;
   font-size: 15px;
   padding-left: 5px;
   padding-right: 5px;
@@ -95,3 +104,16 @@ const _Data = styled.div`
   overflow: hidden;
 `;
 
+const _Text = styled.div`
+  display: inline-block;
+  border: 1px solid #1a1a1a;
+  width: 110px;
+  height: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  & input {
+    font-size: 15px;
+    width: 110px;
+    height: 100%;
+  }
+`;
