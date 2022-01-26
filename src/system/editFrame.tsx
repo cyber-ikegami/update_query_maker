@@ -19,13 +19,14 @@ const editFrame = (props: {
   const recordJsxList: JSX.Element[] = [];
   for (let j = 0; j < props.editBean.dataTable.length; j++) {
     const dataNameJsxList: JSX.Element[] = [];
+    const isUpdateRecord = props.editBean.dataTable[j] === props.editBean.backupTable[j];
     for (let k = 0; k < props.editBean.columnNames.length; k++) {
       const isKey =  props.editBean.primalyKeys[k];
       if(isKey){
         dataNameJsxList.push(<_Data><b>{props.editBean.backupTable[j][k]}</b></_Data>);
       } else {
-        const isSame =  props.editBean.dataTable[j][k] === props.editBean.backupTable[j][k];
-        dataNameJsxList.push(<_Text isSame={isSame}><input type="text" value={props.editBean.dataTable[j][k]} onChange={(e)=>{
+        const isSame = props.editBean.dataTable[j][k] === props.editBean.backupTable[j][k];
+        dataNameJsxList.push(<_Text isSame={isSame} isUpdateRecord={isUpdateRecord}><input type="text" value={props.editBean.dataTable[j][k]} onChange={(e)=>{
           props.editBean.dataTable[j][k] = e.target.value;
           props.setEditBean({...props.editBean}); 
         }} /> </_Text>);
@@ -108,6 +109,7 @@ const _Data = styled.div`
 
 const _Text = styled.div<{
   isSame: boolean;
+  isUpdateRecord: boolean;
 }>`
   display: inline-block;
   border: 1px solid #1a1a1a;
@@ -117,6 +119,7 @@ const _Text = styled.div<{
   overflow: hidden;
   & input {
     color: ${props => props.isSame?'#000000':'#ff3333'};
+    background-color: ${props => props.isUpdateRecord? '#ffffff':'#b5e8ee'};
     font-size: 15px;
     width: 110px;
     height: 100%;
