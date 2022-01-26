@@ -19,13 +19,23 @@ const editFrame = (props: {
   const recordJsxList: JSX.Element[] = [];
   for (let j = 0; j < props.editBean.dataTable.length; j++) {
     const dataNameJsxList: JSX.Element[] = [];
-    const isUpdateRecord = props.editBean.dataTable[j] === props.editBean.backupTable[j];
+
+    const isUpdateRecord = props.editBean.dataTable[j].join('-') !== props.editBean.backupTable[j].join('-');
+    // let isUpdateRecord = false;
+    // for (let i = 0; i < props.editBean.columnNames.length; i++) {
+    //   if(props.editBean.dataTable[j][i] !== props.editBean.backupTable[j][i]){
+    //     isUpdateRecord = true;
+    //     break;
+    //   }
+    // }
+
     for (let k = 0; k < props.editBean.columnNames.length; k++) {
       const isKey =  props.editBean.primalyKeys[k];
       if(isKey){
         dataNameJsxList.push(<_Data><b>{props.editBean.backupTable[j][k]}</b></_Data>);
       } else {
         const isSame = props.editBean.dataTable[j][k] === props.editBean.backupTable[j][k];
+
         dataNameJsxList.push(<_Text isSame={isSame} isUpdateRecord={isUpdateRecord}><input type="text" value={props.editBean.dataTable[j][k]} onChange={(e)=>{
           props.editBean.dataTable[j][k] = e.target.value;
           props.setEditBean({...props.editBean}); 
@@ -119,7 +129,7 @@ const _Text = styled.div<{
   overflow: hidden;
   & input {
     color: ${props => props.isSame?'#000000':'#ff3333'};
-    background-color: ${props => props.isUpdateRecord? '#ffffff':'#b5e8ee'};
+    background-color: ${props => props.isUpdateRecord? '#b5e8ee':'#ffffff'};
     font-size: 15px;
     width: 110px;
     height: 100%;
