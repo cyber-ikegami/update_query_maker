@@ -9,7 +9,6 @@ const App = () => {
   type Mode = 'import' | 'edit' | 'output';
   const [mode, setMode] = useState<Mode>('import');
   const [baseText, setBaseText] = useState<string>('');
-
   const [editBean, setEditBean] = useState<null|EditBean>(null);
 
   // 画面切り替え
