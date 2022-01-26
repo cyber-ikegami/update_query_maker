@@ -37,7 +37,7 @@ const App = () => {
       </>;
       break;
     case 'output':
-      contentsJsx = <OutputFrame />;
+      contentsJsx = <OutputFrame  editBean={editBean as EditBean}/>;
       buttonsJsx = <>
         <_Button>編集に戻る</_Button>
         <_Button>UPDATE文作成</_Button>
@@ -48,10 +48,10 @@ const App = () => {
   return (
     <>
       <_Header>
-        <_ModeItem isActive={mode === 'import'} isEnable={mode === 'import' || mode === 'edit' || mode === 'output'} onClick={() => {
+        <_ModeItem isActive={mode === 'import'} isEnable={true} onClick={() => {
           setMode('import')
         }} >データセット</_ModeItem>
-        <_ModeItem isActive={mode === 'edit'} isEnable={mode === 'edit' || mode === 'output'} onClick={() => {
+        <_ModeItem isActive={mode === 'edit'} isEnable={editBean != null} onClick={() => {
           setMode('edit')
         }} >データ編集</_ModeItem>
         <_ModeItem isActive={mode === 'output'} isEnable={mode === 'output'} onClick={() => {

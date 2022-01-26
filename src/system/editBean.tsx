@@ -8,6 +8,11 @@ export type EditBean = {
     primalyKeys: boolean[];
 }
 
+// export const outputEditBean = (): EditBean => {
+//     return {
+//     };
+// }
+
 export const createEditBean = (baseText: string): EditBean => {
     const primalyKeys: boolean[] = [];
     const dataTable: string[][] = [];
