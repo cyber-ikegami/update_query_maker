@@ -4,12 +4,14 @@ import ImportFrame from './importFrame';
 import EditFrame from './editFrame';
 import OutputFrame from './outputFrame';
 import { createEditBean, EditBean } from './editBean';
+import { createOutputBean, OutputBean } from './outputBean';
 
 const App = () => {
   type Mode = 'import' | 'edit' | 'output';
   const [mode, setMode] = useState<Mode>('import');
   const [baseText, setBaseText] = useState<string>('');
-  const [editBean, setEditBean] = useState<null|EditBean>(null);
+  const [editBean, setEditBean] = useState<null | EditBean>(null);
+  const [outputBean, setOutputBean] = useState<null | OutputBean>(null);
 
   // 画面切り替え
   let contentsJsx = <></>;
@@ -32,12 +34,13 @@ const App = () => {
           setEditBean(createEditBean(baseText));
         }}>変更をリセット</_Button>
         <_Button onClick={() => {
+          setOutputBean(createOutputBean(editBean as EditBean));
           setMode('output')
         }}>UPDATE文作成</_Button>
       </>;
       break;
     case 'output':
-      contentsJsx = <OutputFrame  editBean={editBean as EditBean}/>;
+      contentsJsx = <OutputFrame outputBean={outputBean as OutputBean} />;
       buttonsJsx = <>
         <_Button>編集に戻る</_Button>
         <_Button>UPDATE文作成</_Button>
