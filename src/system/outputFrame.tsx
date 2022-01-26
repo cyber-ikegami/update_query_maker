@@ -1,21 +1,15 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { EditBean } from './editBean';
+import { OutputBean } from './outputBean';
 
 const outputFrame = (props: {
-  editBean: EditBean;
-  // setEditBean: Function;
+  // editBean: EditBean;
+  outputBean: OutputBean;
 })=> {
-  const outputList: JSX.Element[] = [];
-  for (let i = 0; i < props.editBean.dataTable.length; i++) {
-    if (props.editBean.dataTable[i].join('-') !== props.editBean.backupTable[i].join('-')) {
-      for (let j = 0; j < props.editBean.columnNames.length; j++) {
-        outputList.push(<textarea readOnly>{props.editBean.backupTable[i][j]}</textarea>);
-      }
-    }
-  }
+  // const outputList: JSX.Element[] = [];
+  // outputList.push(<>{props.outputBean.outputValue}</>);
   return (
-      <_Frame><textarea value={'a'} readOnly/></_Frame>
+      <_Frame><textarea readOnly>{props.outputBean.outputValue}</textarea></_Frame>
   );
 }
 
