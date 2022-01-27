@@ -10,6 +10,7 @@ const App = () => {
   type Mode = 'import' | 'edit' | 'output';
   const [mode, setMode] = useState<Mode>('import');
   const [baseText, setBaseText] = useState<string>('');
+  const [tableName, setTableName] = useState<string>('');
   const [editBean, setEditBean] = useState<null | EditBean>(null);
   const [outputBean, setOutputBean] = useState<null | OutputBean>(null);
 
@@ -28,20 +29,20 @@ const App = () => {
       </>;
       break;
     case 'edit':
-      contentsJsx = <EditFrame editBean={editBean as EditBean} setEditBean={setEditBean} />;
+      contentsJsx = <EditFrame editBean={editBean as EditBean} setEditBean={setEditBean} tableName={tableName} setTableName={setTableName}/>;
       buttonsJsx = <>
         <_Button onClick={() => {
           setEditBean(createEditBean(baseText));
         }}>変更をリセット</_Button>
         <_Button onClick={() => {
-          setOutputBean(createOutputBean(editBean as EditBean));
-          setMode('output')
+          setOutputBean(createOutputBean(editBean as EditBean, tableName));
+          setMode('output');
         }}>UPDATE文作成</_Button>
       </>;
       break;
-    case 'output':
-      contentsJsx = <OutputFrame outputBean={outputBean as OutputBean} />;
-      buttonsJsx = <>
+      case 'output':
+        contentsJsx = <OutputFrame outputBean={outputBean as OutputBean}/>;
+        buttonsJsx = <>
         <_Button>編集に戻る</_Button>
         <_Button>UPDATE文作成</_Button>
       </>;

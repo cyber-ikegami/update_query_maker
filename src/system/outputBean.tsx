@@ -6,9 +6,8 @@ export type OutputBean = {
     outputValue: string;
 }
 
-export const createOutputBean = (editBean: EditBean): OutputBean => {
+export const createOutputBean = (editBean: EditBean, tableName: string): OutputBean => {
     let outputValue: string = '';
-    let tableName: string = 'XXX';
     
     for (let i = 0; i < editBean.dataTable.length; i++) {
         const isUpdateRecord = editBean.dataTable[i].join('-') !== editBean.backupTable[i].join('-');

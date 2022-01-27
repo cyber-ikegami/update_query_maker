@@ -3,11 +3,8 @@ import styled from 'styled-components';
 import { OutputBean } from './outputBean';
 
 const outputFrame = (props: {
-  // editBean: EditBean;
   outputBean: OutputBean;
 })=> {
-  // const outputList: JSX.Element[] = [];
-  // outputList.push(<>{props.outputBean.outputValue}</>);
   return (
       <_Frame><textarea readOnly>{props.outputBean.outputValue}</textarea></_Frame>
   );
