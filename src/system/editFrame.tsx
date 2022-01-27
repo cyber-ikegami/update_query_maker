@@ -8,14 +8,18 @@ const editFrame = (props: {
   tableName: string;
   setTableName: Function;
 }) => {
+  const isInput = props.tableName !== '';
+  
   const columnNameJsxList: JSX.Element[] = [];
   const primalyKeyList: JSX.Element[] = [];
   for (let i = 0; i < props.editBean.columnNames.length; i++) {
+    let isClick = props.editBean.primalyKeys[i];
     columnNameJsxList.push(<_Column>{props.editBean.columnNames[i]}</_Column>);
-    primalyKeyList.push(<_Check><input type="checkbox" checked={props.editBean.primalyKeys[i]} onChange={(e)=>{
-      props.editBean.primalyKeys[i] = e.target.checked;
+    primalyKeyList.push(<_Key isClick={isClick} onClick={() => {
+      isClick = !isClick;
+      props.editBean.primalyKeys[i] = isClick;
       props.setEditBean({...props.editBean}); 
-    }} /> </_Check>);
+    }} ><b>KEY</b></_Key>);
   }
   
   const recordJsxList: JSX.Element[] = [];
@@ -23,13 +27,6 @@ const editFrame = (props: {
     const dataNameJsxList: JSX.Element[] = [];
 
     const isUpdateRecord = props.editBean.dataTable[j].join('-') !== props.editBean.backupTable[j].join('-');
-    // let isUpdateRecord = false;
-    // for (let i = 0; i < props.editBean.columnNames.length; i++) {
-    //   if(props.editBean.dataTable[j][i] !== props.editBean.backupTable[j][i]){
-    //     isUpdateRecord = true;
-    //     break;
-    //   }
-    // }
 
     for (let k = 0; k < props.editBean.columnNames.length; k++) {
       const isKey =  props.editBean.primalyKeys[k];
@@ -49,7 +46,7 @@ const editFrame = (props: {
 
   return (
     <_Frame>
-      <_Name><span>■テーブル名</span><textarea value={props.tableName} onChange={(e)=>{
+      <_Name isInput={isInput}><span>■テーブル名</span><textarea value={props.tableName} onChange={(e)=>{
         props.setTableName(e.target.value);
       }}/></_Name>
       <_Table>
@@ -72,12 +69,15 @@ const _Frame = styled.div`
   height: 100%;
 `;
 
-const _Name = styled.div`
+const _Name = styled.div<{
+  isInput: boolean;
+}>`
   background-color: #b9c3eb;
   display: inline-block;
   width: 100%;
   height: 50px;
   & textarea {
+    background-color: ${props => props.isInput?'#ffffff':'#ebff33'};
     resize:none;
     margin-left: 10px;
     margin-bottom: 10px;
@@ -117,8 +117,13 @@ const _Column = styled.div`
   height: 100%;
 `;
 
-const _Check = styled.div`
-  background-color: #78d8c6;
+const _Key = styled.div<{
+  isClick: boolean;
+}>`
+  background-color: ${props => props.isClick?'#78d8c6':'#9dafac'};
+  color: ${props => props.isClick?'#264ec9':'#807e7e'};
+  text-align: center; 
+  font-size: 15px;
   display: inline-block;
   border: 1px solid #1a1a1a;
   padding-left: 5px;
