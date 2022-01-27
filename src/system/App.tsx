@@ -57,7 +57,7 @@ const App = () => {
         <_ModeItem isActive={mode === 'edit'} isEnable={editBean != null} onClick={() => {
           setMode('edit')
         }} >データ編集</_ModeItem>
-        <_ModeItem isActive={mode === 'output'} isEnable={mode === 'output'} onClick={() => {
+        <_ModeItem isActive={mode === 'output'} isEnable={outputBean != null} onClick={() => {
           setMode('output')
         }} >出力結果</_ModeItem>
       </_Header>

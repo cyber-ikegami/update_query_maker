@@ -21,6 +21,7 @@ const _Frame = styled.div`
   height: 100%;
   & textarea {
     background-color: #dcdcdc;
+    color: #1945c9;
     resize: none;
     margin-left: 10px;
     margin-top: 10px;
