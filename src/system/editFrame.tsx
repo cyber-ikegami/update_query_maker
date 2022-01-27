@@ -5,6 +5,8 @@ import { EditBean } from './editBean';
 const editFrame = (props: {
   editBean: EditBean;
   setEditBean: Function;
+  tableName: string;
+  setTableName: Function;
 }) => {
   const columnNameJsxList: JSX.Element[] = [];
   const primalyKeyList: JSX.Element[] = [];
@@ -46,7 +48,11 @@ const editFrame = (props: {
   }
 
   return (
-    <_Frame><_Table>
+    <_Frame>
+      <_Name><span>■テーブル名</span><textarea value={props.tableName} onChange={(e)=>{
+        props.setTableName(e.target.value);
+      }}/></_Name>
+      <_Table>
       <_Record>
         {columnNameJsxList}
       </_Record>
@@ -66,6 +72,24 @@ const _Frame = styled.div`
   height: 100%;
 `;
 
+const _Name = styled.div`
+  background-color: #b9c3eb;
+  display: inline-block;
+  width: 100%;
+  height: 50px;
+  & textarea {
+    resize:none;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    width: calc(100% - 20px);
+    height: calc(100% - 30px);
+    box-sizing: border-box; 
+  }
+  & span {
+    font-size: 15px;
+  }
+`;
+
 const _Table = styled.div`
   background-color: #d9dde9;
   display: inline-block;
@@ -74,7 +98,7 @@ const _Table = styled.div`
   white-space: nowrap;
   overflow: scroll;
   width: calc(100% - 20px);
-  height: calc(100% - 20px);
+  height: calc(100% - 70px);
 `;
 
 const _Record = styled.div`
