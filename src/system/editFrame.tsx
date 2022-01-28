@@ -22,6 +22,11 @@ const editFrame = (props: {
       isKeyClick = !isKeyClick;
       props.editBean.primalyKeys[i] = isKeyClick;
       props.setEditBean({ ...props.editBean });
+      if (isKeyClick && isNumberClick) {
+        isNumberClick = !isNumberClick;
+        props.editBean.number[i] = isNumberClick;
+        // props.setEditBean({ ...props.editBean });
+      }
     }} >{(props.editBean.primalyKeys[i] ? <b>KEY</b> : 'KEY')}</_Key>);
 
     numberList.push(<_Number isNumberClick={isNumberClick} isKeyClick={isKeyClick} onClick={() => {
