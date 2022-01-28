@@ -6,16 +6,19 @@ export type EditBean = {
     backupTable: string[][];
     dataTable: string[][];
     primalyKeys: boolean[];
+    number: boolean[];
 }
 
 export const createEditBean = (baseText: string): EditBean => {
     const primalyKeys: boolean[] = [];
+    const number: boolean[] = [];
     const dataTable: string[][] = [];
     const records = baseText.split(/\n/g); 
     const columnNames = records[0].split(/[,\t]/g);
 
     for(let i = 0; i < columnNames.length; i++) {
         primalyKeys.push(false);
+        number.push(false);
     }
 
     for(let i = 1; i < records.length; i++){
@@ -28,6 +31,7 @@ export const createEditBean = (baseText: string): EditBean => {
     return {
         columnNames,
         primalyKeys,
+        number: number,
         backupTable: JSON.parse(JSON.stringify(dataTable)),
         dataTable
     };

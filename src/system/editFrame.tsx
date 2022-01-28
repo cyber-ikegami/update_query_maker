@@ -12,14 +12,23 @@ const editFrame = (props: {
   
   const columnNameJsxList: JSX.Element[] = [];
   const primalyKeyList: JSX.Element[] = [];
+  const numberList: JSX.Element[] = [];
   for (let i = 0; i < props.editBean.columnNames.length; i++) {
-    let isClick = props.editBean.primalyKeys[i];
+    let isKeyClick = props.editBean.primalyKeys[i];
+    let isNumberClick = props.editBean.number[i];
     columnNameJsxList.push(<_Column>{props.editBean.columnNames[i]}</_Column>);
-    primalyKeyList.push(<_Key isClick={isClick} onClick={() => {
-      isClick = !isClick;
-      props.editBean.primalyKeys[i] = isClick;
+
+    primalyKeyList.push(<_Key isKeyClick={isKeyClick} onClick={() => {
+      isKeyClick = !isKeyClick;
+      props.editBean.primalyKeys[i] = isKeyClick;
       props.setEditBean({...props.editBean}); 
     }} ><b>KEY</b></_Key>);
+
+    numberList.push(<_Number isNumberClick={isNumberClick} onClick={() => {
+      isNumberClick = !isNumberClick;
+      props.editBean.number[i] = isNumberClick;
+      props.setEditBean({...props.editBean}); 
+    }} >{(props.editBean.number[i]? '<b>' : '')}NUMBER{(props.editBean.number[i]? '</b>' : '')}</_Number>);
   }
   
   const recordJsxList: JSX.Element[] = [];
@@ -55,6 +64,9 @@ const editFrame = (props: {
       </_Record>
       <_Record>
         {primalyKeyList}
+      </_Record>
+      <_Record>
+        {numberList}
       </_Record>
         {recordJsxList}
     </_Table></_Frame>
@@ -118,10 +130,25 @@ const _Column = styled.div`
 `;
 
 const _Key = styled.div<{
-  isClick: boolean;
+  isKeyClick: boolean;
 }>`
-  background-color: ${props => props.isClick?'#78d8c6':'#9dafac'};
-  color: ${props => props.isClick?'#264ec9':'#807e7e'};
+  background-color: ${props => props.isKeyClick?'#78d8c6':'#87c0b7'};
+  color: ${props => props.isKeyClick?'#264ec9':'#807e7e'};
+  text-align: center; 
+  font-size: 15px;
+  display: inline-block;
+  border: 1px solid #1a1a1a;
+  padding-left: 5px;
+  padding-right: 5px;
+  width: 100px;
+  height: 100%;
+`;
+
+const _Number = styled.div<{
+  isNumberClick: boolean;
+}>`
+  background-color: ${props => props.isNumberClick?'#d878b5':'#bb93ac'};
+  color: ${props => props.isNumberClick?'#264ec9':'#807e7e'};
   text-align: center; 
   font-size: 15px;
   display: inline-block;
