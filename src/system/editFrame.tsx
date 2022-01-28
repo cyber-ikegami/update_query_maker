@@ -22,18 +22,17 @@ const editFrame = (props: {
       isKeyClick = !isKeyClick;
       props.editBean.primalyKeys[i] = isKeyClick;
       props.setEditBean({ ...props.editBean });
-      if (isKeyClick && isNumberClick) {
-        isNumberClick = !isNumberClick;
-        props.editBean.number[i] = isNumberClick;
-        // props.setEditBean({ ...props.editBean });
-      }
     }} >{(props.editBean.primalyKeys[i] ? <b>KEY</b> : 'KEY')}</_Key>);
 
-    numberList.push(<_Number isNumberClick={isNumberClick} isKeyClick={isKeyClick} onClick={() => {
-      isNumberClick = !isNumberClick;
-      props.editBean.number[i] = isNumberClick;
-      props.setEditBean({ ...props.editBean });
-    }} >{(props.editBean.number[i] ? <b>NUMBER</b> : (isKeyClick ? '-' : 'NUMBER'))}</_Number>);
+    if (isKeyClick) {
+      numberList.push(<_Number isNumberClick={false} isKeyClick={isKeyClick}>-</_Number>);
+    } else {
+      numberList.push(<_Number isNumberClick={isNumberClick} isKeyClick={isKeyClick} onClick={() => {
+        isNumberClick = !isNumberClick;
+        props.editBean.number[i] = isNumberClick;
+        props.setEditBean({ ...props.editBean });
+      }} >{(props.editBean.number[i] ? <b>NUMBER</b> : 'NUMBER')}</_Number>);
+    }
   }
 
   const recordJsxList: JSX.Element[] = [];
