@@ -18,7 +18,7 @@ export const createOutputBean = (editBean: EditBean, tableName: string): OutputB
                 const isSame = editBean.dataTable[i][j] === editBean.backupTable[i][j];
                 const isKey =  editBean.primalyKeys[j];
                 if(isKey){
-                    keyColumn = `${keyColumn}${(keyColumn != '' ? ' and ' : '')}${editBean.columnNames[j]} = '${editBean.dataTable[i][j]}'`;
+                    keyColumn = `${keyColumn}${(keyColumn != '' ? ' and ' : '')}${editBean.columnNames[j]} = '${editBean.backupTable[i][j]}'`;
                 } else {
                     if (!isSame) {
                         updateColumn = `${updateColumn}${(updateColumn != '' ? ', ' : '')}${editBean.columnNames[j]} = ${(editBean.number[j] ? '' : '\'')}${editBean.dataTable[i][j]}${(editBean.number[j] ? '' : '\'')}`;
