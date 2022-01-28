@@ -9,7 +9,7 @@ const editFrame = (props: {
   setTableName: Function;
 }) => {
   const isInput = props.tableName !== '';
-  
+
   const columnNameJsxList: JSX.Element[] = [];
   const primalyKeyList: JSX.Element[] = [];
   const numberList: JSX.Element[] = [];
@@ -21,16 +21,16 @@ const editFrame = (props: {
     primalyKeyList.push(<_Key isKeyClick={isKeyClick} onClick={() => {
       isKeyClick = !isKeyClick;
       props.editBean.primalyKeys[i] = isKeyClick;
-      props.setEditBean({...props.editBean}); 
-    }} ><b>KEY</b></_Key>);
+      props.setEditBean({ ...props.editBean });
+    }} >{(props.editBean.primalyKeys[i] ? <b>KEY</b> : 'KEY')}</_Key>);
 
-    numberList.push(<_Number isNumberClick={isNumberClick} onClick={() => {
+    numberList.push(<_Number isNumberClick={isNumberClick} isKeyClick={isKeyClick} onClick={() => {
       isNumberClick = !isNumberClick;
       props.editBean.number[i] = isNumberClick;
-      props.setEditBean({...props.editBean}); 
-    }} >{(props.editBean.number[i]? '<b>' : '')}NUMBER{(props.editBean.number[i]? '</b>' : '')}</_Number>);
+      props.setEditBean({ ...props.editBean });
+    }} >{(props.editBean.number[i] ? <b>NUMBER</b> : (isKeyClick ? '-' : 'NUMBER'))}</_Number>);
   }
-  
+
   const recordJsxList: JSX.Element[] = [];
   for (let j = 0; j < props.editBean.dataTable.length; j++) {
     const dataNameJsxList: JSX.Element[] = [];
@@ -38,15 +38,15 @@ const editFrame = (props: {
     const isUpdateRecord = props.editBean.dataTable[j].join('-') !== props.editBean.backupTable[j].join('-');
 
     for (let k = 0; k < props.editBean.columnNames.length; k++) {
-      const isKey =  props.editBean.primalyKeys[k];
-      if(isKey){
+      const isKey = props.editBean.primalyKeys[k];
+      if (isKey) {
         dataNameJsxList.push(<_Data><b>{props.editBean.backupTable[j][k]}</b></_Data>);
       } else {
         const isSame = props.editBean.dataTable[j][k] === props.editBean.backupTable[j][k];
 
-        dataNameJsxList.push(<_Text isSame={isSame} isUpdateRecord={isUpdateRecord}><input type="text" value={props.editBean.dataTable[j][k]} onChange={(e)=>{
+        dataNameJsxList.push(<_Text isSame={isSame} isUpdateRecord={isUpdateRecord}><input type="text" value={props.editBean.dataTable[j][k]} onChange={(e) => {
           props.editBean.dataTable[j][k] = e.target.value;
-          props.setEditBean({...props.editBean}); 
+          props.setEditBean({ ...props.editBean });
         }} /> </_Text>);
       }
     }
@@ -55,21 +55,21 @@ const editFrame = (props: {
 
   return (
     <_Frame>
-      <_Name isInput={isInput}><span>■テーブル名</span><textarea value={props.tableName} onChange={(e)=>{
+      <_Name isInput={isInput}><span>■テーブル名</span><textarea value={props.tableName} onChange={(e) => {
         props.setTableName(e.target.value);
-      }}/></_Name>
+      }} /></_Name>
       <_Table>
-      <_Record>
-        {columnNameJsxList}
-      </_Record>
-      <_Record>
-        {primalyKeyList}
-      </_Record>
-      <_Record>
-        {numberList}
-      </_Record>
+        <_Record>
+          {columnNameJsxList}
+        </_Record>
+        <_Record>
+          {primalyKeyList}
+        </_Record>
+        <_Record>
+          {numberList}
+        </_Record>
         {recordJsxList}
-    </_Table></_Frame>
+      </_Table></_Frame>
   );
 }
 
@@ -89,7 +89,7 @@ const _Name = styled.div<{
   width: 100%;
   height: 50px;
   & textarea {
-    background-color: ${props => props.isInput?'#ffffff':'#ebff33'};
+    background-color: ${props => props.isInput ? '#ffffff' : '#ebff33'};
     resize:none;
     margin-left: 10px;
     margin-bottom: 10px;
@@ -132,8 +132,8 @@ const _Column = styled.div`
 const _Key = styled.div<{
   isKeyClick: boolean;
 }>`
-  background-color: ${props => props.isKeyClick?'#78d8c6':'#87c0b7'};
-  color: ${props => props.isKeyClick?'#264ec9':'#807e7e'};
+  background-color: ${props => props.isKeyClick ? '#78d8c6' : '#87c0b7'};
+  color: ${props => props.isKeyClick ? '#264ec9' : '#807e7e'};
   text-align: center; 
   font-size: 15px;
   display: inline-block;
@@ -146,9 +146,12 @@ const _Key = styled.div<{
 
 const _Number = styled.div<{
   isNumberClick: boolean;
+  isKeyClick: boolean;
 }>`
-  background-color: ${props => props.isNumberClick?'#d878b5':'#bb93ac'};
-  color: ${props => props.isNumberClick?'#264ec9':'#807e7e'};
+  background-color: ${props => props.isNumberClick ? '#d878b5' : '#bb93ac'};
+  color: ${props => props.isNumberClick ? '#264ec9' : '#807e7e'};
+  pointer-events:  ${props => props.isKeyClick ? 'none' : 'oute'};
+  opacity: ${props => props.isKeyClick ? '80%' : '100%'};
   text-align: center; 
   font-size: 15px;
   display: inline-block;
@@ -184,8 +187,8 @@ const _Text = styled.div<{
   white-space: nowrap;
   overflow: hidden;
   & input {
-    color: ${props => props.isSame?'#000000':'#ff3333'};
-    background-color: ${props => props.isUpdateRecord? '#b5e8ee':'#ffffff'};
+    color: ${props => props.isSame ? '#000000' : '#ff3333'};
+    background-color: ${props => props.isUpdateRecord ? '#b5e8ee' : '#ffffff'};
     font-size: 15px;
     width: 110px;
     height: 100%;
