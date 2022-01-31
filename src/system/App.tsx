@@ -41,6 +41,9 @@ const App = () => {
           if (tableName === '') {
             alertMessage.push('テーブル名は必須です。');
           }
+          if (!editBean?.primalyKeys.includes(true)) {
+            alertMessage.push('キー項目を1つ以上設定してください。');
+          }
           if (editBean?.backupTable.join('-') === editBean?.dataTable.join('-')) {
             alertMessage.push('対象データがありません。');
           }
