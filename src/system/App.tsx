@@ -21,7 +21,9 @@ const App = () => {
     case 'import':
       contentsJsx = <ImportFrame baseText={baseText} setBaseText={setBaseText} />;
       buttonsJsx = <>
-        <_Button>クリア</_Button>
+        <_Button onClick={() => {
+          setBaseText('');
+        }}>クリア</_Button>
         <_Button onClick={() => {
           setEditBean(createEditBean(baseText));
           setMode('edit');
@@ -29,23 +31,31 @@ const App = () => {
       </>;
       break;
     case 'edit':
-      contentsJsx = <EditFrame editBean={editBean as EditBean} setEditBean={setEditBean} tableName={tableName} setTableName={setTableName}/>;
+      contentsJsx = <EditFrame editBean={editBean as EditBean} setEditBean={setEditBean} tableName={tableName} setTableName={setTableName} />;
       buttonsJsx = <>
         <_Button onClick={() => {
           setEditBean(createEditBean(baseText));
         }}>変更をリセット</_Button>
         <_Button onClick={() => {
-          setOutputBean(createOutputBean(editBean as EditBean, tableName));
-          setMode('output');
+          let alertMessage = [];
+          if (tableName === '') {
+            alertMessage.push('テーブル名は必須です。');
+          }
+          if (editBean?.backupTable.join('-') === editBean?.dataTable.join('-')) {
+            alertMessage.push('対象データがありません。');
+          }
+
+          if (alertMessage.length > 0) {
+            alert(alertMessage.join('\n'));
+          } else {
+            setOutputBean(createOutputBean(editBean as EditBean, tableName));
+            setMode('output');
+          }
         }}>UPDATE文作成</_Button>
       </>;
       break;
-      case 'output':
-        contentsJsx = <OutputFrame outputBean={outputBean as OutputBean}/>;
-        buttonsJsx = <>
-        <_Button>編集に戻る</_Button>
-        <_Button>UPDATE文作成</_Button>
-      </>;
+    case 'output':
+      contentsJsx = <OutputFrame outputBean={outputBean as OutputBean} />;
       break;
   }
 
