@@ -91,14 +91,14 @@ const _Name = styled.div<{
   background-color: #b9c3eb;
   display: inline-block;
   width: 100%;
-  height: 50px;
+  height: 30px;
   & textarea {
     background-color: ${props => props.isInput ? '#ffffff' : '#ebff33'};
-    resize:none;
-    margin-left: 10px;
-    margin-bottom: 10px;
-    width: calc(100% - 20px);
-    height: calc(100% - 30px);
+    resize: none;
+    margin-top: 5px;
+    margin-left: 5px;
+    width: 200px;
+    height: 20px;
     box-sizing: border-box; 
   }
   & span {
@@ -114,7 +114,7 @@ const _Table = styled.div`
   white-space: nowrap;
   overflow: scroll;
   width: calc(100% - 20px);
-  height: calc(100% - 70px);
+  height: calc(100% - 50px);
 `;
 
 const _Record = styled.div`
