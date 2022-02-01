@@ -34,7 +34,6 @@ const App = () => {
           for (let i = 1; i < records.length - 1; i++) {
             const dataLength = records[i].split(/[,\t]/g).length;
             if (columnLength !== dataLength) {
-              alert(`${columnLength},${dataLength}`);
               alertMessage.push('すべての行のカラム数が一致するよう入力してください。');
               break;
             } 
