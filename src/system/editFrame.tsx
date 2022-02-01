@@ -62,7 +62,7 @@ const editFrame = (props: {
       <_Name isInput={isInput}><span>■テーブル名</span><textarea value={props.tableName} onChange={(e) => {
         props.setTableName(e.target.value);
       }} /></_Name>
-      <_Table>
+      <_Header>
         <_Record>
           {columnNameJsxList}
         </_Record>
@@ -72,6 +72,8 @@ const editFrame = (props: {
         <_Record>
           {numberList}
         </_Record>
+      </_Header>
+      <_Table>
         {recordJsxList}
       </_Table></_Frame>
   );
@@ -106,15 +108,26 @@ const _Name = styled.div<{
   }
 `;
 
-const _Table = styled.div`
+const _Header = styled.div`
   background-color: #d9dde9;
   display: inline-block;
   margin-left: 10px;
   margin-top: 10px;
   white-space: nowrap;
+  /* overflow: scroll; */
+  width: calc(100% - 20px);
+  height: 72px;
+`;
+
+const _Table = styled.div`
+  background-color: #d9dde9;
+  display: inline-block;
+  margin-left: 10px;
+  /* margin-top: 10px; */
+  white-space: nowrap;
   overflow: scroll;
   width: calc(100% - 20px);
-  height: calc(100% - 50px);
+  height: calc(100% - 122px);
 `;
 
 const _Record = styled.div`
