@@ -25,8 +25,27 @@ const App = () => {
           setBaseText('');
         }}>クリア</_Button>
         <_Button onClick={() => {
-          setEditBean(createEditBean(baseText));
-          setMode('edit');
+          let alertMessage = [];
+          const records = baseText.split(/\n/g);
+          const columnLength = records[0].split(/[,\t]/g).length;
+          if (records.length <= 2) {
+            alertMessage.push('2行以上(ヘッダ含む)のデータを入力してください。');
+          }
+          for (let i = 1; i < records.length - 1; i++) {
+            const dataLength = records[i].split(/[,\t]/g).length;
+            if (columnLength !== dataLength) {
+              alert(`${columnLength},${dataLength}`);
+              alertMessage.push('すべての行のカラム数が一致するよう入力してください。');
+              break;
+            } 
+          }
+          
+          if (alertMessage.length > 0) {
+            alert(alertMessage.join('\n'));
+          } else {
+            setEditBean(createEditBean(baseText));
+            setMode('edit');
+          }
         }}>インポート</_Button>
       </>;
       break;
@@ -95,6 +114,7 @@ const _ModeItem = styled.div<{
   isActive: boolean;
   isEnable: boolean;
 }>`
+  cursor: pointer;
   background-color: ${props => props.isActive ? '#f37e7e' : '#eee197'};
   pointer-events:  ${props => props.isEnable ? 'auto' : 'none'};
   opacity: ${props => props.isEnable ? '100%' : '50%'};
