@@ -2,7 +2,9 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { OutputBean } from './outputBean';
 
+// output(出力結果)のフレーム
 const outputFrame = (props: {
+  // output(出力結果)のBean
   outputBean: OutputBean;
 })=> {
   return (
@@ -12,6 +14,7 @@ const outputFrame = (props: {
 
 export default outputFrame;
 
+// フレーム
 const _Frame = styled.div`
   background-color: #b9c3eb;
   width: 100%;

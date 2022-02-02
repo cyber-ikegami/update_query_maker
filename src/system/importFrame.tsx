@@ -1,19 +1,23 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
+// import(データセット)のフレーム
 const importFrame = (props: {
-    baseText: string;
-    setBaseText: Function;
-})=> {
+  // データセット画面で入力された値
+  baseText: string;
+  // データセット画面で入力された値(セッター)
+  setBaseText: Function;
+}) => {
   return (
-      <_Frame><textarea value={props.baseText} onChange={(e)=>{
-        props.setBaseText(e.target.value);
-      }}/></_Frame>
+    <_Frame><textarea value={props.baseText} onChange={(e) => {
+      props.setBaseText(e.target.value);
+    }} /></_Frame>
   );
 }
 
 export default importFrame;
 
+// フレーム
 const _Frame = styled.div`
   background-color: #b9c3eb;
   width: 100%;
