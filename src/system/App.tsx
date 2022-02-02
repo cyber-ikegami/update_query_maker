@@ -7,16 +7,25 @@ import { createEditBean, EditBean } from './editBean';
 import { createOutputBean, OutputBean } from './outputBean';
 
 const App = () => {
+  // 画面遷移の管理(データセット、データ編集、出力結果)
   type Mode = 'import' | 'edit' | 'output';
+  // 画面遷移の管理
   const [mode, setMode] = useState<Mode>('import');
+  // データセット画面で入力された値
   const [baseText, setBaseText] = useState<string>('');
+  // テーブル名
   const [tableName, setTableName] = useState<string>('');
+  // edit(データ編集)のBean
   const [editBean, setEditBean] = useState<null | EditBean>(null);
+  // output(出力結果)のBean
   const [outputBean, setOutputBean] = useState<null | OutputBean>(null);
 
-  // 画面切り替え
+  // 画面の状態を管理する
   let contentsJsx = <></>;
+  // ボタンの動作を管理する
   let buttonsJsx = <></>;
+
+  // 画面切り替え
   switch (mode) {
     case 'import':
       contentsJsx = <ImportFrame baseText={baseText} setBaseText={setBaseText} />;
@@ -36,9 +45,9 @@ const App = () => {
             if (columnLength !== dataLength) {
               alertMessage.push('すべての行のカラム数が一致するよう入力してください。');
               break;
-            } 
+            }
           }
-          
+
           if (alertMessage.length > 0) {
             alert(alertMessage.join('\n'));
           } else {

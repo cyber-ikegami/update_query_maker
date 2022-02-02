@@ -2,16 +2,25 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { EditBean } from './editBean';
 
+// edit(データ編集)のフレーム
 const editFrame = (props: {
+  // edit(データ編集)のBean
   editBean: EditBean;
+  // edit(データ編集)のBean(セッター)
   setEditBean: Function;
+  // テーブル名
   tableName: string;
+  // テーブル名(セッター)
   setTableName: Function;
 }) => {
+  // テーブル名に値が入力されているか
   const isInput = props.tableName !== '';
 
+  // カラム名JSXのリスト
   const columnNameJsxList: JSX.Element[] = [];
+  // キー項目JSXのリスト
   const primalyKeyList: JSX.Element[] = [];
+  // NUMBER JSXのリスト
   const numberList: JSX.Element[] = [];
   for (let i = 0; i < props.editBean.columnNames.length; i++) {
     let isKeyClick = props.editBean.primalyKeys[i];
@@ -35,13 +44,16 @@ const editFrame = (props: {
     }
   }
 
+  // レコードJSXのリスト
   const recordJsxList: JSX.Element[] = [];
   for (let j = 0; j < props.editBean.dataTable.length; j++) {
+    // セルJSXのリスト
     const dataNameJsxList: JSX.Element[] = [];
-
+    // セルの値に変更があったか
     const isUpdateRecord = props.editBean.dataTable[j].join('-') !== props.editBean.backupTable[j].join('-');
 
     for (let k = 0; k < props.editBean.columnNames.length; k++) {
+      // キー項目かどうか
       const isKey = props.editBean.primalyKeys[k];
       if (isKey) {
         dataNameJsxList.push(<_Data><b>{props.editBean.backupTable[j][k]}</b></_Data>);
@@ -83,12 +95,14 @@ const editFrame = (props: {
 
 export default editFrame;
 
+// フレーム
 const _Frame = styled.div`
   background-color: #b9c3eb;
   width: 100%;
   height: 100%;
 `;
 
+// テーブル名
 const _Name = styled.div<{
   isInput: boolean;
 }>`
@@ -110,6 +124,7 @@ const _Name = styled.div<{
   }
 `;
 
+// テーブル
 const _Table = styled.div`
   background-color: #d9dde9;
   display: inline-block;
@@ -121,6 +136,7 @@ const _Table = styled.div`
   height: calc(100% - 40px);
 `;
 
+// ヘッダー
 const _Header = styled.div`
   background-color: #d9dde9;
   display: block;
@@ -130,6 +146,7 @@ const _Header = styled.div`
   height: 72px;
 `;
 
+// ボディ
 const _Body = styled.div`
   background-color: #d9dde9;
   display: inline-block;
@@ -140,11 +157,13 @@ const _Body = styled.div`
   height: calc(100% - 82px);
 `;
 
+// レコード
 const _Record = styled.div`
   display: block;
   height: 24px;
 `;
 
+// セル(ヘッダー、KEY、NUMBERに継承)
 const _Cell = styled.div`
   display: inline-block;
   font-size: 15px;
@@ -155,10 +174,12 @@ const _Cell = styled.div`
   height: 100%;
   `;
 
+// ヘッダー(カラム名)
 const _Column = styled(_Cell)`
     background-color: #7890d8;
   `;
 
+// KEY(キー項目)
 const _Key = styled(_Cell) <{
   isKeyClick: boolean;
 }>`
@@ -167,6 +188,7 @@ const _Key = styled(_Cell) <{
   text-align: center; 
 `;
 
+// NUMBER(update文で数値として扱うか)
 const _Number = styled(_Cell) <{
   isNumberClick: boolean;
   isKeyClick: boolean;
@@ -178,6 +200,7 @@ const _Number = styled(_Cell) <{
   text-align: center; 
 `;
 
+// キー項目の列
 const _Data = styled(_Cell)`
   background-color: #ffef78;
   color: #264ec9;
@@ -185,6 +208,7 @@ const _Data = styled(_Cell)`
   overflow: hidden;
 `;
 
+// セル内のデータの文字
 const _Text = styled.div<{
   isSame: boolean;
   isUpdateRecord: boolean;
