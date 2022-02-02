@@ -62,19 +62,21 @@ const editFrame = (props: {
       <_Name isInput={isInput}><span>■テーブル名</span><textarea value={props.tableName} onChange={(e) => {
         props.setTableName(e.target.value);
       }} /></_Name>
-      <_Header>
-        <_Record>
-          {columnNameJsxList}
-        </_Record>
-        <_Record>
-          {primalyKeyList}
-        </_Record>
-        <_Record>
-          {numberList}
-        </_Record>
-      </_Header>
       <_Table>
-        {recordJsxList}
+        <_Header>
+          <_Record>
+            {columnNameJsxList}
+          </_Record>
+          <_Record>
+            {primalyKeyList}
+          </_Record>
+          <_Record>
+            {numberList}
+          </_Record>
+        </_Header>
+        <_Body>
+          {recordJsxList}
+        </_Body>
       </_Table></_Frame>
   );
 }
@@ -108,26 +110,35 @@ const _Name = styled.div<{
   }
 `;
 
-const _Header = styled.div`
-  background-color: #d9dde9;
-  display: inline-block;
-  margin-left: 10px;
-  margin-top: 10px;
-  white-space: nowrap;
-  /* overflow: scroll; */
-  width: calc(100% - 20px);
-  height: 72px;
-`;
-
 const _Table = styled.div`
   background-color: #d9dde9;
   display: inline-block;
   margin-left: 10px;
-  /* margin-top: 10px; */
+  overflow-x: scroll;
+  overflow-y: hidden;
   white-space: nowrap;
-  overflow: scroll;
   width: calc(100% - 20px);
-  height: calc(100% - 122px);
+  height: calc(100% - 40px);
+`;
+
+const _Header = styled.div`
+  background-color: #d9dde9;
+  display: block;
+  margin-left: 10px;
+  margin-top: 10px;
+  width: calc(100% - 20px);
+  height: 72px;
+`;
+
+const _Body = styled.div`
+  background-color: #d9dde9;
+  display: block;
+  margin-left: 10px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  white-space: nowrap;
+  width: calc(100% - 20px);
+  height: calc(100% - 82px);
 `;
 
 const _Record = styled.div`
