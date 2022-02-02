@@ -132,12 +132,11 @@ const _Header = styled.div`
 
 const _Body = styled.div`
   background-color: #d9dde9;
-  display: block;
+  display: inline-block;
   margin-left: 10px;
   overflow-x: hidden;
   overflow-y: scroll;
   white-space: nowrap;
-  width: calc(100% - 20px);
   height: calc(100% - 82px);
 `;
 
