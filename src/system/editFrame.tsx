@@ -145,33 +145,29 @@ const _Record = styled.div`
   height: 24px;
 `;
 
-const _Column = styled.div`
-  background-color: #7890d8;
+const _Cell = styled.div`
+  display: inline-block;
   font-size: 15px;
   padding-left: 5px;
   padding-right: 5px;
-  display: inline-block;
   border: 1px solid #1a1a1a;
   width: 100px;
   height: 100%;
-`;
+  `;
 
-const _Key = styled.div<{
+const _Column = styled(_Cell)`
+    background-color: #7890d8;
+  `;
+
+const _Key = styled(_Cell) <{
   isKeyClick: boolean;
 }>`
   background-color: ${props => props.isKeyClick ? '#78d8c6' : '#87c0b7'};
   color: ${props => props.isKeyClick ? '#264ec9' : '#807e7e'};
   text-align: center; 
-  font-size: 15px;
-  display: inline-block;
-  border: 1px solid #1a1a1a;
-  padding-left: 5px;
-  padding-right: 5px;
-  width: 100px;
-  height: 100%;
 `;
 
-const _Number = styled.div<{
+const _Number = styled(_Cell) <{
   isNumberClick: boolean;
   isKeyClick: boolean;
 }>`
@@ -180,25 +176,11 @@ const _Number = styled.div<{
   pointer-events:  ${props => props.isKeyClick ? 'none' : 'oute'};
   opacity: ${props => props.isKeyClick ? '80%' : '100%'};
   text-align: center; 
-  font-size: 15px;
-  display: inline-block;
-  border: 1px solid #1a1a1a;
-  padding-left: 5px;
-  padding-right: 5px;
-  width: 100px;
-  height: 100%;
 `;
 
-const _Data = styled.div`
+const _Data = styled(_Cell)`
   background-color: #ffef78;
   color: #264ec9;
-  font-size: 15px;
-  padding-left: 5px;
-  padding-right: 5px;
-  display: inline-block;
-  border: 1px solid #1a1a1a;
-  width: 100px;
-  height: 100%;
   white-space: nowrap;
   overflow: hidden;
 `;
